@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Today's Appointments</h2>
+
+<p>Total Appointments Today: <strong>@Model.TotalAppointmentsToday</strong></p>
+<p>Pending Appointments: <strong>@Model.PendingAppointments</strong></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appt in Model.UpcomingAppointments)
+        {
+            <tr>
+                <td>@appt.AppointmentDate.ToString("HH:mm")</td>
+                <td>@appt.Patient.FirstName @appt.Patient.LastName</td>
+                <td>@appt.Doctor.Name (@appt.Doctor.Specialization)</td>
+                <td>@appt.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "Appointments")" class="btn btn-primary">Book New Appointment</a>
+
+@*href="@Url.Action("Create", "Appointments")"*@
+
+@*<input asp-action="Create" asp-route="Appointments" class="btn btn-primary" value="Book New Appointment" />
+*@

@@ -7,7 +7,7 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string? PasswordHash { get; set; } // If not using Identity
+        public string PasswordHash { get; set; } // If not using Identity
         public ICollection<Appointment> Appointments { get; set; }
     }
 }
